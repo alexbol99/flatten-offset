@@ -1,0 +1,12 @@
+{
+  "source": {
+    "include": ["./index.js", "README.md"],
+    "exclude": ["./docs", "./node_modules", "./coverage", "./test", "./test.js"],
+    "includePattern": ".js$"
+  },
+  "opts": {
+    "destination": "./docs/",
+    "recurse": true,
+    "template": "./node_modules/minami"
+  }
+}
