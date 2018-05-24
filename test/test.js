@@ -168,7 +168,7 @@ describe('#Algorithms.Offset Polygon', function () {
         // expect(offsetPolygon.edges.size).to.be.equal(0);
     });
 
-    it('Method offset can shrink polygon. Case 8. Touching', function () {
+    it('Method offset can shrink polygon. Case 8. Cluster of duplicated intersection point', function () {
         let shapes = [
             segment(point(200, 100), point(200, 300)),
             segment(point(200, 300), point(440, 300)),
@@ -184,7 +184,9 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        // let offsetPolygon = polygon.offset(-50);
-        // expect(offsetPolygon.faces.size).to.be.equal(4);
+        let offsetPolygon = polygon.offset(-50);
+        expect(offsetPolygon.faces.size).to.be.equal(2);
+        expect([...offsetPolygon.faces][0].size).to.be.equal(8);
+        expect([...offsetPolygon.faces][1].size).to.be.equal(8);
     });
 });

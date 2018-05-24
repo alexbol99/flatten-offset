@@ -1,0 +1,44 @@
+{
+  "name": "flatten-offset",
+  "version": "1.0.0",
+  "description": "Offset polygon",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "generate-docs": "jsdoc -c ./.jsdoc.json --verbose",
+    "npm-publish": "npm version patch; git push && git push --tags; npm publish",
+    "build": "webpack --progress --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbol99/flatten-offset.git"
+  },
+  "keywords": [
+    "polygon",
+    "offset",
+    "dilation",
+    "flatten-js",
+    "geometry"
+  ],
+  "author": "Alex Bol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexbol99/flatten-offset/issues"
+  },
+  "homepage": "https://github.com/alexbol99/flatten-offset#readme",
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "dependencies": {
+    "flatten-boolean-op": "^1.0.10",
+    "flatten-js": "^0.3.7"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "jsdoc": "^3.5.5",
+    "minami": "^1.2.3",
+    "mocha": "^5.1.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
+  }
+}
