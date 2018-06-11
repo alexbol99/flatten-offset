@@ -25,12 +25,17 @@ So we can use it in the way:
 ```javascript
     let offsetPolygon = polygon.offset(offset_value)
 ```
+When using umd minified package:
+```javascript
+    let {offset} = Offset;
+    let offsetPolygon = offset(polygon, offset_value)
+```
 
 Example:
 ```javascript
     let Flatten = require('flatten-js');
     require('flatten-offset');
-    
+    let {segment, point, Polygon} = Flatten;
     // Create polygon
     let shapes = [
             segment(point(200,100), point(200,300)),

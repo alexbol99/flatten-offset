@@ -13,11 +13,16 @@ let {point, segment, arc, vector} = Flatten;
  * Class Offset implements offset of polygons
  */
 class Offset {
-    static offsetPolygon(polygon, value) {
+    /**
+     * Offset polygon by given value
+     * @param {Polygon} polygon - input polygon
+     * @param {number} value - offset value, may be positive or negative
+     */
+    static offset(polygon, value) {
         let w = value;
 
         let edges = [...polygon.edges];
-        let offsetPolygon = polygon;
+        let offsetPolygon = polygon.clone();
         let offsetEdge;
 
         if (w != 0) {
@@ -202,8 +207,8 @@ class Offset {
 }
 
 Flatten.Polygon.prototype.offset = function(value) {
-    return Offset.offsetPolygon(this, value);
-}
+    return Offset.offset(this, value);
+};
 
-module.exports = {}
+module.exports = Offset;
 
