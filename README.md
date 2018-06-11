@@ -12,29 +12,29 @@ and then [boolean operation](https://github.com/alexbol99/flatten-boolean-op) pe
 When offset value is positive, offset edges are united with original contour, when negative - they are
 subtracted from original contour.
 
-## Installation
+## Disclaimer
 
-You have to install flatten-offset package together with [FlattenJS](<https://github.com/alexbol99/flatten-js>) library, in order to use its polygon creation methods.
+Still under testing! Don't use in production!
+
+## Installation
   
-    npm install --save flatten-js flatten-offset 
+    npm install --save flatten-offset 
 
 ## Usage
 
 The package expose single method *offset*, which is added to Flatten.Polygon prototype.
-So we can use it in the way:
+We can use it in this way:
 ```javascript
     let offsetPolygon = polygon.offset(offset_value)
 ```
-When using umd minified package:
-```javascript
-    let {offset} = Offset;
-    let offsetPolygon = offset(polygon, offset_value)
-```
+
+Instance of FlattenJS library is added as a property to the Offset class.
+There is no need to install FlattenJS package separately.
 
 Example:
 ```javascript
-    let Flatten = require('flatten-js');
-    require('flatten-offset');
+    let Offset = require('flatten-offset');
+    let Flatten = Offset.Flatten;    
     let {segment, point, Polygon} = Flatten;
     // Create polygon
     let shapes = [
