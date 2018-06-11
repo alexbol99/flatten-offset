@@ -28,7 +28,7 @@ class Offset {
         if (w != 0) {
 
             for (let edge of edges) {
-                if (edge.shape instanceof Flatten.Segment) {
+                if (edge.isSegment()) {
                     offsetEdge = Offset.offsetSegment(edge.shape, w);
                 }
                 else {
