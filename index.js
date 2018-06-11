@@ -210,5 +210,7 @@ Flatten.Polygon.prototype.offset = function(value) {
     return Offset.offset(this, value);
 };
 
+Offset.Flatten = Flatten;
+
 module.exports = Offset;
 
