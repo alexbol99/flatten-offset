@@ -1,25 +1,17 @@
 'use strict';
 
-let expect = require('chai').expect;
-let Flatten = require('flatten-js');
+import {expect} from 'chai';
+// import Flatten from '@flatten-js/core/dist/main.umd.js';
+import {Polygon} from "@flatten-js/core";
+import {point, segment, arc, circle, CW, CCW} from "@flatten-js/core";
 
-require('../index');
-
-// let now = require("performance-now");
-
-let {Polygon} = Flatten;
-let {point, segment, arc, circle} = Flatten;
-// let {unify, subtract, intersect, boolean_op, arrange} = BooleanOp;
+import {offset} from "../index.js";
+import {arcSE} from "../src/createArcs";
 
 describe('#Algorithms.Offset Polygon', function () {
-    it('Method offset defined on class Polygon', function () {
-        expect(Polygon.prototype.offset).to.exist;
-        expect(Polygon.prototype.offset).to.be.a('function');
-    });
-    it('Method offset defined on polygon instance', function () {
-        let polygon = new Polygon();
-        expect(polygon.offset).to.exist;
-        expect(polygon.offset).to.be.a('function');
+    it('Function offset defined', function () {
+        expect(offset).to.exist;
+        expect(offset).to.be.a('function');
     });
     it('Method offset can enlarge polygon. Case 1. Offset to one-faced polygon', function () {
         let shapes = [
@@ -37,7 +29,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(20);
+        let offsetPolygon = offset(polygon,20);
         expect(offsetPolygon.faces.size).to.be.equal(1);
         expect([...offsetPolygon.faces][0].size).to.be.equal(16);
     });
@@ -57,7 +49,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(40);
+        let offsetPolygon = offset(polygon,40);
         expect(offsetPolygon.faces.size).to.be.equal(2);
         expect([...offsetPolygon.faces][0].size).to.be.equal(7);
         expect([...offsetPolygon.faces][1].size).to.be.equal(11);
@@ -78,7 +70,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(80);
+        let offsetPolygon = offset(polygon,80);
         expect(offsetPolygon.faces.size).to.be.equal(1);
         expect([...offsetPolygon.faces][0].size).to.be.equal(11);
     });
@@ -98,7 +90,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(-20);
+        let offsetPolygon = offset(polygon,-20);
         expect(offsetPolygon.faces.size).to.be.equal(1);
         expect([...offsetPolygon.faces][0].size).to.be.equal(14);
     });
@@ -118,7 +110,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(-30);
+        let offsetPolygon = offset(polygon,-30);
         expect(offsetPolygon.faces.size).to.be.equal(2);
         expect([...offsetPolygon.faces][0].size).to.be.equal(6);
         expect([...offsetPolygon.faces][1].size).to.be.equal(6);
@@ -139,7 +131,7 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(-55);
+        let offsetPolygon = offset(polygon,-55);
         expect(offsetPolygon.faces.size).to.be.equal(4);
         expect([...offsetPolygon.faces][0].size).to.be.equal(4);
         expect([...offsetPolygon.faces][1].size).to.be.equal(4);
@@ -162,10 +154,10 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(-80);
+        let offsetPolygon = offset(polygon,-80);
         expect(offsetPolygon.faces.size).to.be.equal(0);
         // bug: 4 edges left
-        // expect(offsetPolygon.edges.size).to.be.equal(0);
+        expect(offsetPolygon.edges.size).to.be.equal(0);
     });
 
     it('Method offset can shrink polygon. Case 8. Cluster of duplicated intersection point', function () {
@@ -184,9 +176,30 @@ describe('#Algorithms.Offset Polygon', function () {
 
         let polygon = new Polygon();
         polygon.addFace(shapes);
-        let offsetPolygon = polygon.offset(-50);
+        let offsetPolygon = offset(polygon,-50);
         expect(offsetPolygon.faces.size).to.be.equal(2);
         expect([...offsetPolygon.faces][0].size).to.be.equal(8);
         expect([...offsetPolygon.faces][1].size).to.be.equal(8);
+    });
+    it('Method offset can enlarge polygon with arcs. Case ... inner hole', function () {
+        let shapes = [
+            segment(point(200,100), point(200,300)),
+            segment(point(200,300), point(440,300)),
+            arcSE(point(470,225),point(440,300), point(440,150), CCW),
+
+            segment(point(440,150), point(500,150)),
+            arcSE(point(470,225),point(500,150), point(500,300), CCW),
+
+            segment(point(500,300), point(740,300)),
+            segment(point(740,300), point(740,100)),
+            segment(point(740,100), point(200,100))
+        ];
+
+        let polygon = new Polygon();
+        polygon.addFace(shapes);
+        let offsetPolygon = offset(polygon,33);
+        expect(offsetPolygon.faces.size).to.be.equal(2);
+        expect([...offsetPolygon.faces][0].size).to.be.equal(5);
+        expect([...offsetPolygon.faces][1].size).to.be.equal(11);
     });
 });

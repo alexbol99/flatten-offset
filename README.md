@@ -3,7 +3,7 @@
 
 # Offset polygon
 
-This package implements algorithm of equidistant offset of polygon. It relies on the  [FlattenJS](<https://github.com/alexbol99/flatten-js>)
+This package implements algorithm of equidistant offset of polygon. It relies on the  [flatten-js](<https://github.com/alexbol99/flatten-js>)
 library and its polygon model, which is multi polygon comprised from a number of islands and holes, 
 see [this](https://beta.observablehq.com/@alexbol99/flattenjs-tutorials-polygons) interactive notebook for more  details.
 
@@ -12,30 +12,28 @@ and then [boolean operation](https://github.com/alexbol99/flatten-boolean-op) pe
 When offset value is positive, offset edges are united with original contour, when negative - they are
 subtracted from original contour.
 
-## Disclaimer
+## Contacts
 
-Still under testing! Don't use in production!
+Follow me on Twitter [@alex_bol_](https://twitter.com/alex_bol_)
+
 
 ## Installation
   
-    npm install --save flatten-offset 
+    npm install --save @flatten-js/polygon-offset
 
 ## Usage
 
-The package expose single method *offset*, which is added to Flatten.Polygon prototype.
-We can use it in this way:
 ```javascript
-    let offsetPolygon = polygon.offset(offset_value)
+    import {offset} from "@flatten-js/polygon-offset"
+
+    let offsetPolygon = offset(polygon, offset_value)
 ```
 
-Instance of FlattenJS library is added as a property to the Offset class.
-There is no need to install FlattenJS package separately.
-
-Example:
+## Example:
 ```javascript
-    let Offset = require('flatten-offset');
-    let Flatten = Offset.Flatten;    
-    let {segment, point, Polygon} = Flatten;
+    import {segment, point, Polygon} from "@flatten-js/core"
+    import {offset} from "@flatten-js/polygon-offset"
+
     // Create polygon
     let shapes = [
             segment(point(200,100), point(200,300)),
@@ -58,5 +56,4 @@ Example:
 ```
 
 See [Offset Polygon](https://beta.observablehq.com/@alexbol99/offset-polygon-test/2) interactive notebook
-to explore this algorithm in work.
- 
+to explore this algorithm.
