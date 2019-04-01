@@ -1,5 +1,6 @@
-[![npm version](https://badge.fury.io/js/flatten-offset.svg)](https://badge.fury.io/js/flatten-offset)
+[![npm version](https://badge.fury.io/js/%40flatten-js%2Fpolygon-offset.svg)](https://badge.fury.io/js/%40flatten-js%2Fpolygon-offset)
 [![Build Status](https://travis-ci.org/alexbol99/flatten-offset.svg?branch=master)](https://travis-ci.org/alexbol99/flatten-offset)
+[![Coverage Status](https://coveralls.io/repos/github/alexbol99/flatten-offset/badge.svg?branch=master)](https://coveralls.io/github/alexbol99/flatten-offset?branch=master)
 
 # Offset polygon
 
