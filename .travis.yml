@@ -6,6 +6,9 @@ node_js:
 install:
   - npm install
 
+before_install:
+  - npm install @flatten-js/core
+
 script:
   - npm run test
 

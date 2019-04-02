@@ -3,11 +3,10 @@
  * Created by Alex Bol on 12/02/2018.
  */
 "use strict";
-import {Point, Segment, Vector, Line, Box, Arc, Polygon, Face} from "@flatten-js/core";
+import {Segment, Arc, Polygon, Face} from "@flatten-js/core";
 import {CW, CCW, INSIDE, OUTSIDE, ORIENTATION} from "@flatten-js/core";
-import {point, segment, vector} from "@flatten-js/core";
+import {vector} from "@flatten-js/core";
 import {unify,subtract} from "@flatten-js/boolean-op";
-
 import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
 
 import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";

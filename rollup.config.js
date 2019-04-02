@@ -27,5 +27,6 @@ export default {
                 moduleDirectory: 'node_modules'
             }
         })
-    ]
+    ],
+    external: ['@flatten-js/core']
 };

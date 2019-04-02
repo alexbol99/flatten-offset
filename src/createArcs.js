@@ -1,6 +1,4 @@
-import {Point, Segment, Vector, Line, Box, Arc} from "@flatten-js/core";
-import {point, segment, arc, vector} from "@flatten-js/core";
-import {Utils} from "@flatten-js/core";
+import {Utils, Arc, vector} from "@flatten-js/core";
 
 export function arcSE(center, start, end, counterClockwise) {
     let startAngle = vector(center,start).slope;

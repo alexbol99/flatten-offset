@@ -181,7 +181,7 @@ describe('#Algorithms.Offset Polygon', function () {
         expect([...offsetPolygon.faces][0].size).to.be.equal(8);
         expect([...offsetPolygon.faces][1].size).to.be.equal(8);
     });
-    it('Method offset can enlarge polygon with arcs. Case ... inner hole', function () {
+    it('Method offset can enlarge polygon with arcs. Case 9 create inner hole', function () {
         let shapes = [
             segment(point(200,100), point(200,300)),
             segment(point(200,300), point(440,300)),
