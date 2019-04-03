@@ -18,7 +18,8 @@ export default {
             file: 'dist/main.umd.js',
             format: 'umd',
             name: 'polygon-offset',
-            exports: 'named'
+            exports: 'named',
+            globals: {"@flatten-js/core": "Flatten"}
         },
     ],
     plugins: [

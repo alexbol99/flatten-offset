@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@flatten-js/core')) :
     typeof define === 'function' && define.amd ? define(['exports', '@flatten-js/core'], factory) :
-    (global = global || self, factory(global['polygon-offset'] = {}, global.core));
+    (global = global || self, factory(global['polygon-offset'] = {}, global.Flatten));
 }(this, function (exports, core) { 'use strict';
 
     /**
