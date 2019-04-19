@@ -5,12 +5,12 @@
 # Offset polygon
 
 This package implements algorithm of equidistant offset of polygon. It relies on the  [flatten-js](<https://github.com/alexbol99/flatten-js>)
-library and its polygon model, which is multi polygon comprised from a number of islands and holes, 
-see [this](https://beta.observablehq.com/@alexbol99/flattenjs-tutorials-polygons) interactive notebook for more  details.
+library and its polygon model, which is multi polygon comprised from a number of islands and holes. 
+See [this](https://beta.observablehq.com/@alexbol99/flattenjs-tutorials-polygons) interactive notebook for more  details.
 
 Algorithm is based on the idea of morphological offset, when each edge of the polygon is mapped to its offset,
 and then [boolean operation](https://github.com/alexbol99/flatten-boolean-op) performed between original contour and offset edges.
-When offset value is positive, offset edges are united with original contour, when negative - they are
+When offset value is positive, offset edges are unified with original contour, when negative - they are
 subtracted from original contour.
 
 ## Contacts
@@ -19,8 +19,16 @@ Follow me on Twitter [@alex_bol_](https://twitter.com/alex_bol_)
 
 
 ## Installation
-  
+```bash  
     npm install --save @flatten-js/polygon-offset
+```
+    
+The package [@flatten-js/core](<https://github.com/alexbol99/flatten-js>) is peer dependency of this package
+and have to be installed separately:
+
+```bash
+    npm install --save @flatten-js/core
+```
 
 ## Usage
 

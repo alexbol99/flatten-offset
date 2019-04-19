@@ -1,7 +1,6 @@
 'use strict';
 
 import {expect} from 'chai';
-// import Flatten from '@flatten-js/core/dist/main.umd.js';
 import {Polygon} from "@flatten-js/core";
 import {point, segment, arc, circle, CW, CCW} from "@flatten-js/core";
 
