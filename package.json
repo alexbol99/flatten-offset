@@ -1,6 +1,6 @@
 {
   "name": "@flatten-js/polygon-offset",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Polygon equidistant offset",
   "main": "dist/main.cjs.js",
   "umd:main": "dist/main.umd.js",
@@ -45,7 +45,7 @@
     "@flatten-js/boolean-op": "^1.1.1"
   },
   "peerDependencies": {
-    "@flatten-js/core": "^1.0.14"
+    "@flatten-js/core": "^1.0.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

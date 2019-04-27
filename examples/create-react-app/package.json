@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@flatten-js/core": "^1.0.14",
-    "@flatten-js/polygon-offset": "^1.0.2",
+    "@flatten-js/core": "^1.0.15",
+    "@flatten-js/polygon-offset": "^1.0.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8"
