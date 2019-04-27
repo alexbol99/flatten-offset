@@ -56,7 +56,7 @@ export function offset(polygon, value) {
     return offsetPolygon;
 }
 
-function offsetArc(arc, value) {
+export function offsetArc(arc, value) {
     let edges = [];
 
     let w = Math.abs(value);
@@ -160,7 +160,7 @@ function offsetArc(arc, value) {
     return polygon;
 }
 
-function offsetSegment(seg, value) {
+export function offsetSegment(seg, value) {
     let w = Math.abs(value);
 
     let polygon = new Polygon();

@@ -6,6 +6,7 @@ import {point, segment, arc, circle, CW, CCW} from "@flatten-js/core";
 
 import {offset} from "../index.js";
 import {arcSE} from "../src/createArcs";
+import {offsetArc} from "../src/polygonOffset";
 
 describe('#Algorithms.Offset Polygon', function () {
     it('Function offset defined', function () {
@@ -200,5 +201,11 @@ describe('#Algorithms.Offset Polygon', function () {
         expect(offsetPolygon.faces.size).to.be.equal(2);
         expect([...offsetPolygon.faces][0].size).to.be.equal(5);
         expect([...offsetPolygon.faces][1].size).to.be.equal(11);
+    });
+
+    it('Method offset arc can create legal polygon. Simple case', function () {
+        let testArc = arc(point(133434061, 124903644), 400000, 0, 4.71238898038469, CW );
+        let testOffsetArc = offsetArc(testArc, 20);
+        expect(testOffsetArc.faces.size).to.be.equal(1);
     });
 });

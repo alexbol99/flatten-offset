@@ -725,6 +725,12 @@
             endAngle += 2*Math.PI;
             counterClockwise = true;
         }
+        else if (core.Utils.GT(endAngle, 2*Math.PI)) {
+            endAngle -= 2*Math.PI;
+        }
+        else if (core.Utils.LT(endAngle, -2*Math.PI)) {
+            endAngle += 2*Math.PI;
+        }
         let r = core.vector(center, start).length;
 
         return new core.Arc(center, r, startAngle, endAngle, counterClockwise);
@@ -734,9 +740,16 @@
         let endAngle = core.vector(center,end).slope;
         let startAngle = endAngle - sweep;
         if (core.Utils.EQ(startAngle, endAngle)) {
-            endAngle += 2*Math.PI;
+            startAngle += 2*Math.PI;
             counterClockwise = true;
         }
+        else if (core.Utils.GT(startAngle, 2*Math.PI)) {
+            startAngle -= 2*Math.PI;
+        }
+        else if (core.Utils.LT(startAngle, -2*Math.PI)) {
+            startAngle += 2*Math.PI;
+        }
+
         let r = core.vector(center, end).length;
 
         return new core.Arc(center, r, startAngle, endAngle, counterClockwise);

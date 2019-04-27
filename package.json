@@ -1,6 +1,6 @@
 {
   "name": "@flatten-js/polygon-offset",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Polygon equidistant offset",
   "main": "dist/main.cjs.js",
   "umd:main": "dist/main.umd.js",
