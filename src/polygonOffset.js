@@ -1,18 +1,23 @@
-
 /**
  * Created by Alex Bol on 12/02/2018.
  */
+
 "use strict";
 import {Segment, Arc, Polygon, Face} from "@flatten-js/core";
 import {CW, CCW, INSIDE, OUTSIDE, ORIENTATION} from "@flatten-js/core";
 import {vector} from "@flatten-js/core";
-import {unify,subtract} from "@flatten-js/boolean-op";
-import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
-
-import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";
-import {removeNotRelevantChains, removeOldFaces, restoreFaces} from "@flatten-js/boolean-op";
+// import {unify,subtract} from "@flatten-js/boolean-op";
+// import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
+//
+// import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";
+// import {removeNotRelevantChains, removeOldFaces, restoreFaces} from "@flatten-js/boolean-op";
 
 import {arcSE, arcStartSweep, arcEndSweep} from "./createArcs";
+import Flatten from "@flatten-js/core";
+
+const {unify, subtract, BOOLEAN_UNION} = Flatten.BooleanOperations;
+const {addToIntPoints, getSortedArray, splitByIntersections} = Flatten.BooleanOperations;
+const {removeNotRelevantChains, removeOldFaces, restoreFaces} = Flatten.BooleanOperations;
 
 /**
  * Offset polygon by given value

@@ -42,10 +42,9 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "@flatten-js/boolean-op": "^1.1.1"
   },
   "peerDependencies": {
-    "@flatten-js/core": "^1.0.15"
+    "@flatten-js/core": "^1.2.14"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
