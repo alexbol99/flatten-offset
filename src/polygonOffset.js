@@ -6,11 +6,7 @@
 import {Segment, Arc, Polygon, Face} from "@flatten-js/core";
 import {CW, CCW, INSIDE, OUTSIDE, ORIENTATION} from "@flatten-js/core";
 import {vector} from "@flatten-js/core";
-import {unify,subtract} from "@flatten-js/boolean-op";
-import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
-
-import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";
-import {removeNotRelevantChains, removeOldFaces, restoreFaces} from "@flatten-js/boolean-op";
+import {BooleanOperations} from "@flatten-js/core";
 
 import {arcSE, arcStartSweep, arcEndSweep} from "./createArcs";
 
@@ -45,10 +41,10 @@ export function offset(polygon, value) {
             }
 
             if (w > 0) {
-                offsetPolygon = unify(offsetPolygon, offsetEdge);
+                offsetPolygon = BooleanOperations.unify(offsetPolygon, offsetEdge);
             }
             else {
-                offsetPolygon = subtract(offsetPolygon, offsetEdge);
+                offsetPolygon = BooleanOperations.subtract(offsetPolygon, offsetEdge);
             }
         }
     }
@@ -98,13 +94,13 @@ export function offsetArc(arc, value) {
     edge_cap2 = [...polygon.edges][3];
 
     for (let pt of ips) {
-        addToIntPoints(edge_cap1, pt, int_points);
-        addToIntPoints(edge_cap2, pt, int_points);
+        BooleanOperations.addToIntPoints(edge_cap1, pt, int_points);
+        BooleanOperations.addToIntPoints(edge_cap2, pt, int_points);
     }
 
     // Sort intersection points and insert them as new vertices
-    let int_points_sorted = getSortedArray(int_points);
-    splitByIntersections(polygon, int_points_sorted);
+    let int_points_sorted = BooleanOperations.getSortedArray(int_points);
+    BooleanOperations.splitByIntersections(polygon, int_points_sorted);
 
 
     // Set BV flags
@@ -116,8 +112,8 @@ export function offsetArc(arc, value) {
     }
 
     // Remove inner "chains"
-    let op = BOOLEAN_UNION;
-    removeNotRelevantChains(polygon, op, int_points_sorted, true);
+    let op = BooleanOperations.BOOLEAN_UNION;
+    BooleanOperations.removeNotRelevantChains(polygon, op, int_points_sorted, true);
 
     // return int_points_sorted;
     // Swap links
@@ -148,9 +144,9 @@ export function offsetArc(arc, value) {
         }
 
         // remove old faces
-        removeOldFaces(polygon, int_points);
+        BooleanOperations.removeOldFaces(polygon, int_points);
         // restore faces
-        restoreFaces(polygon, int_points, int_points);
+        BooleanOperations.restoreFaces(polygon, int_points, int_points);
     }
 
     let face0 = [...polygon.faces][0];
