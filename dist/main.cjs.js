@@ -226,4 +226,4 @@ function offsetSegment(seg, value) {
     return polygon;
 }
 
-exports.offset = offset;
+exports.default = offset;

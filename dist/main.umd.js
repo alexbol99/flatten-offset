@@ -225,7 +225,7 @@
         return polygon;
     }
 
-    exports.offset = offset;
+    exports.default = offset;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

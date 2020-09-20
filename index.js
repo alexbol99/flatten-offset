@@ -1,1 +1,2 @@
-export {offset} from "./src/polygonOffset";
+import {offset} from "./src/polygonOffset";
+export default offset

@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {Polygon} from "@flatten-js/core";
 import {point, segment, arc, circle, CW, CCW} from "@flatten-js/core";
 
-import {offset} from "../index.js";
+import offset from "../index.js";
 import {arcSE} from "../src/createArcs";
 import {offsetArc} from "../src/polygonOffset";
 
