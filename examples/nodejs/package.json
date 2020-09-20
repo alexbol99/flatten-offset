@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "@flatten-js/core": "^1.2.15",
-    "@flatten-js/polygon-offset": "^1.1.0"
+    "@flatten-js/polygon-offset": "^1.1.1"
   }
 }
