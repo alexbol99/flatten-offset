@@ -40,7 +40,7 @@ and have to be installed separately:
 ## Example:
 ```javascript
     import {segment, point, Polygon} from "@flatten-js/core"
-    import {offset} from "@flatten-js/polygon-offset"
+    import offset from "@flatten-js/polygon-offset"
 
     // Create polygon
     let shapes = [
