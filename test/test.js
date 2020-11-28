@@ -208,4 +208,23 @@ describe('#Algorithms.Offset Polygon', function () {
         let testOffsetArc = offsetArc(testArc, 20);
         expect(testOffsetArc.faces.size).to.be.equal(1);
     });
+    it('Method offset can enlarge to small value', function () {
+        // let shapes = [
+        //     point(0, 0), point(200, 0), point(200, 200), point(0, 200)
+        // ];
+
+        let shapes = [
+            segment(point(0, 0), point(200, 0)),
+            segment(point(200, 0), point(200, 200)),
+            segment(point(200, 200), point(0, 200)),
+            segment(point(0, 200), point(0, 0))
+        ];
+
+        let polygon = new Polygon(shapes);
+        polygon.reverse()
+        let offsetPolygon = offset(polygon, 2);
+
+        expect(offsetPolygon.faces.size).to.be.equal(1);
+        expect(offsetPolygon.edges.size).to.be.equal(8);
+    })
 });
