@@ -32,7 +32,7 @@ and have to be installed separately:
 ## Usage
 
 ```javascript
-    import {offset} from "@flatten-js/polygon-offset"
+    import offset from "@flatten-js/polygon-offset"
 
     let offsetPolygon = offset(polygon, offset_value)
 ```
@@ -60,6 +60,6 @@ and have to be installed separately:
     polygon.addFace(shapes);
     
     // Apply polygon offset
-    let offsetPolygon = polygon.offset(20);
+    let offsetPolygon = offset(polygon, 20);
 ```
 
