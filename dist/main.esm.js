@@ -1,4 +1,4 @@
-import { Arc, vector, Utils, Polygon, CW, CCW, Segment, Face, OUTSIDE, INSIDE, ORIENTATION, BooleanOperations } from '@flatten-js/core';
+import Flatten, { Arc, vector, Utils, Polygon, CW, CCW, Segment, Face, OUTSIDE, INSIDE, ORIENTATION } from '@flatten-js/core';
 
 function arcSE(center, start, end, counterClockwise) {
     let startAngle = vector(center,start).slope;
@@ -53,8 +53,9 @@ function arcEndSweep(center, end, sweep, counterClockwise) {
  * Created by Alex Bol on 12/02/2018.
  */
 
-const {unify, subtract, addToIntPoints, getSortedArray, splitByIntersections, removeNotRelevantChains, removeOldFaces, restoreFaces} = BooleanOperations;
-const {BOOLEAN_UNION} = BooleanOperations;
+const {unify, subtract, BOOLEAN_UNION} = Flatten.BooleanOperations;
+const {addToIntPoints, getSortedArray, splitByIntersections} = Flatten.BooleanOperations;
+const {removeNotRelevantChains, removeOldFaces, restoreFaces} = Flatten.BooleanOperations;
 
 /**
  * Offset polygon by given value
@@ -218,4 +219,4 @@ function offsetSegment(seg, value) {
     return polygon;
 }
 
-export { offset };
+export default offset;

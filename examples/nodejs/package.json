@@ -1,0 +1,17 @@
+{
+  "name": "nodejs",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "“Alex <“alexbol99@gmail.com”>",
+  "license": "ISC",
+  "dependencies": {
+    "@flatten-js/core": "^1.2.15",
+    "@flatten-js/polygon-offset": "^1.1.1"
+  }
+}

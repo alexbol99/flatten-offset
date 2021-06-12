@@ -2,63 +2,66 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@flatten-js/core')) :
     typeof define === 'function' && define.amd ? define(['exports', '@flatten-js/core'], factory) :
     (global = global || self, factory(global['polygon-offset'] = {}, global.Flatten));
-}(this, function (exports, core) { 'use strict';
+}(this, function (exports, Flatten) { 'use strict';
+
+    var Flatten__default = 'default' in Flatten ? Flatten['default'] : Flatten;
 
     function arcSE(center, start, end, counterClockwise) {
-        let startAngle = core.vector(center,start).slope;
-        let endAngle = core.vector(center, end).slope;
-        if (core.Utils.EQ(startAngle, endAngle)) {
+        let startAngle = Flatten.vector(center,start).slope;
+        let endAngle = Flatten.vector(center, end).slope;
+        if (Flatten.Utils.EQ(startAngle, endAngle)) {
             endAngle += 2*Math.PI;
             counterClockwise = true;
         }
-        let r = core.vector(center, start).length;
+        let r = Flatten.vector(center, start).length;
 
-        return new core.Arc(center, r, startAngle, endAngle, counterClockwise);
+        return new Flatten.Arc(center, r, startAngle, endAngle, counterClockwise);
     }
 
     function arcStartSweep(center, start, sweep, counterClockwise) {
-        let startAngle = core.vector(center,start).slope;
+        let startAngle = Flatten.vector(center,start).slope;
         let endAngle = startAngle + sweep;
-        if (core.Utils.EQ(startAngle, endAngle)) {
+        if (Flatten.Utils.EQ(startAngle, endAngle)) {
             endAngle += 2*Math.PI;
             counterClockwise = true;
         }
-        else if (core.Utils.GT(endAngle, 2*Math.PI)) {
+        else if (Flatten.Utils.GT(endAngle, 2*Math.PI)) {
             endAngle -= 2*Math.PI;
         }
-        else if (core.Utils.LT(endAngle, -2*Math.PI)) {
+        else if (Flatten.Utils.LT(endAngle, -2*Math.PI)) {
             endAngle += 2*Math.PI;
         }
-        let r = core.vector(center, start).length;
+        let r = Flatten.vector(center, start).length;
 
-        return new core.Arc(center, r, startAngle, endAngle, counterClockwise);
+        return new Flatten.Arc(center, r, startAngle, endAngle, counterClockwise);
     }
 
     function arcEndSweep(center, end, sweep, counterClockwise) {
-        let endAngle = core.vector(center,end).slope;
+        let endAngle = Flatten.vector(center,end).slope;
         let startAngle = endAngle - sweep;
-        if (core.Utils.EQ(startAngle, endAngle)) {
+        if (Flatten.Utils.EQ(startAngle, endAngle)) {
             startAngle += 2*Math.PI;
             counterClockwise = true;
         }
-        else if (core.Utils.GT(startAngle, 2*Math.PI)) {
+        else if (Flatten.Utils.GT(startAngle, 2*Math.PI)) {
             startAngle -= 2*Math.PI;
         }
-        else if (core.Utils.LT(startAngle, -2*Math.PI)) {
+        else if (Flatten.Utils.LT(startAngle, -2*Math.PI)) {
             startAngle += 2*Math.PI;
         }
 
-        let r = core.vector(center, end).length;
+        let r = Flatten.vector(center, end).length;
 
-        return new core.Arc(center, r, startAngle, endAngle, counterClockwise);
+        return new Flatten.Arc(center, r, startAngle, endAngle, counterClockwise);
     }
 
     /**
      * Created by Alex Bol on 12/02/2018.
      */
 
-    const {unify, subtract, addToIntPoints, getSortedArray, splitByIntersections, removeNotRelevantChains, removeOldFaces, restoreFaces} = core.BooleanOperations;
-    const {BOOLEAN_UNION} = core.BooleanOperations;
+    const {unify, subtract, BOOLEAN_UNION} = Flatten__default.BooleanOperations;
+    const {addToIntPoints, getSortedArray, splitByIntersections} = Flatten__default.BooleanOperations;
+    const {removeNotRelevantChains, removeOldFaces, restoreFaces} = Flatten__default.BooleanOperations;
 
     /**
      * Offset polygon by given value
@@ -107,7 +110,7 @@
         let w = Math.abs(value);
 
         // Define outline polygon
-        let polygon = new core.Polygon();
+        let polygon = new Flatten.Polygon();
         let arc_cap1,arc_cap2;
 
         let arc_outer = arc.clone();
@@ -118,19 +121,19 @@
 
         let arc_inner = undefined;
         if (arc.r > w) {
-            arc_inner = new core.Arc(arc.pc, arc.r - w, arc.endAngle, arc.startAngle,
-                arc.counterClockwise === core.CW ? core.CCW : core.CW);
+            arc_inner = new Flatten.Arc(arc.pc, arc.r - w, arc.endAngle, arc.startAngle,
+                arc.counterClockwise === Flatten.CW ? Flatten.CCW : Flatten.CW);
         }
         else {
             // arc_inner = new Arc(arc.pc, w - arc.r, arc.startAngle, arc.endAngle, arc.counterClockwise);
-            arc_inner = new core.Segment(arc_cap1.end, arc_cap2.start);
+            arc_inner = new Flatten.Segment(arc_cap1.end, arc_cap2.start);
         }
 
         polygon.addFace([arc_outer, arc_cap1, arc_inner, arc_cap2]);
         [...polygon.faces][0].setArcLength();
 
         // Create intersection points
-        let ips = core.Face.getSelfIntersections([...polygon.faces][0], polygon.edges, false);
+        let ips = Flatten.Face.getSelfIntersections([...polygon.faces][0], polygon.edges, false);
 
         // TODO: getSelfIntersections returns points with correspondent edges - avoid duplication
         ips = ips.slice(0,ips.length/2);    // for now slice array to avoid duplication in points
@@ -153,10 +156,10 @@
 
 
         // Set BV flags
-        let bv = core.OUTSIDE;
+        let bv = Flatten.OUTSIDE;
         for (let int_point of int_points_sorted) {
             int_point.edge_before.bv = bv;
-            int_point.edge_after.bv = (bv == core.OUTSIDE ? core.INSIDE : core.OUTSIDE);
+            int_point.edge_after.bv = (bv == Flatten.OUTSIDE ? Flatten.INSIDE : Flatten.OUTSIDE);
             bv = int_point.edge_after.bv;   // invert flag on each iteration
         }
 
@@ -199,7 +202,7 @@
         }
 
         let face0 = [...polygon.faces][0];
-        if (face0.orientation() === core.ORIENTATION.CCW) {
+        if (face0.orientation() === Flatten.ORIENTATION.CCW) {
             polygon.reverse();
         }
         return polygon;
@@ -208,21 +211,21 @@
     function offsetSegment(seg, value) {
         let w = Math.abs(value);
 
-        let polygon = new core.Polygon();
-        let v_seg = core.vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
+        let polygon = new Flatten.Polygon();
+        let v_seg = Flatten.vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
         let v_seg_unit = v_seg.normalize();
         let v_left = v_seg_unit.rotate90CCW().multiply(w);
         let v_right = v_seg_unit.rotate90CW().multiply(w);
         let seg_left = seg.translate(v_left);
         let seg_right = seg.translate(v_right).reverse();
-        let cap1 = arcSE(seg.end, seg_left.end, seg_right.start, core.CW);
-        let cap2 = arcSE(seg.start, seg_right.end, seg_left.start, core.CW);
+        let cap1 = arcSE(seg.end, seg_left.end, seg_right.start, Flatten.CW);
+        let cap2 = arcSE(seg.start, seg_right.end, seg_left.start, Flatten.CW);
 
         polygon.addFace([seg_left, cap1, seg_right, cap2]);
         return polygon;
     }
 
-    exports.offset = offset;
+    exports.default = offset;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

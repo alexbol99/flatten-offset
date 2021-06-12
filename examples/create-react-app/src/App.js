@@ -1,6 +1,6 @@
 import React from 'react';
 import {point, segment, Polygon} from "@flatten-js/core";
-import {offset} from "@flatten-js/polygon-offset";
+import offset from "@flatten-js/polygon-offset";
 
 const shapes = [
   segment(point(200,100), point(200,300)),
@@ -22,7 +22,7 @@ const App = () => {
   const path = (polygon) => [...polygon.faces].reduce( (d, face) => d + face.svg(), "");
   return (
       <div>
-        <h1>Hello Flatten World!</h1>;
+        <h1>Hello Flatten World!</h1>
         <svg width="1500" height="500">
           <path stroke="black" stroke-width="1" fill="lightblue" fill-rule="evenodd" fill-opacity="1"
                 d={path(polygon)} >
