@@ -297,8 +297,8 @@ describe('#Algorithms.Offset Polygon', function () {
             [471.4, 414.7]
         ]
 
-        for (let scale = 0.3; scale <= 1; scale += 0.025) {
-            // const scale = 0.6;
+        // for (let scale = 0.3; scale <= 1; scale += 0.025) {
+            const scale = 0.75;
             const scaledPoints = points.map((pp) => [pp[0] * scale, pp[1] * scale]);
 
             // Calculate offset.
@@ -307,7 +307,7 @@ describe('#Algorithms.Offset Polygon', function () {
             const offsetPolygon = offset(polygon, -3);
 
             expect(offsetPolygon.faces.size).to.be.equal(1);
-        }
+        // }
 
     });
 });

@@ -84,7 +84,7 @@
         let offsetEdge;
 
         if (w != 0) {
-
+            // let counter = 0
             for (let edge of edges) {
                 if (edge.isSegment()) {
                     offsetEdge = offsetSegment(edge.shape, w);
@@ -99,6 +99,7 @@
                 else {
                     offsetPolygon = subtract(offsetPolygon, offsetEdge);
                 }
+                // counter++;
             }
         }
 

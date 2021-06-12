@@ -41,11 +41,9 @@
   "engines": {
     "node": ">=4.2.4"
   },
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "@flatten-js/core": "^1.2.23"
+    "@flatten-js/core": "^1.2.24"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

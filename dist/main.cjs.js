@@ -85,7 +85,7 @@ function offset(polygon, value) {
     let offsetEdge;
 
     if (w != 0) {
-
+        // let counter = 0
         for (let edge of edges) {
             if (edge.isSegment()) {
                 offsetEdge = offsetSegment(edge.shape, w);
@@ -100,6 +100,7 @@ function offset(polygon, value) {
             else {
                 offsetPolygon = subtract(offsetPolygon, offsetEdge);
             }
+            // counter++;
         }
     }
 
