@@ -1,4 +1,3 @@
-
 /**
  * Created by Alex Bol on 12/02/2018.
  */
@@ -6,13 +5,12 @@
 import {Segment, Arc, Polygon, Face} from "@flatten-js/core";
 import {CW, CCW, INSIDE, OUTSIDE, ORIENTATION} from "@flatten-js/core";
 import {vector} from "@flatten-js/core";
-import {unify,subtract} from "@flatten-js/boolean-op";
-import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
-
-import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";
-import {removeNotRelevantChains, removeOldFaces, restoreFaces} from "@flatten-js/boolean-op";
+import {BooleanOperations} from "@flatten-js/core";
 
 import {arcSE, arcStartSweep, arcEndSweep} from "./createArcs";
+
+const {unify, subtract, addToIntPoints, getSortedArray, splitByIntersections, removeNotRelevantChains, removeOldFaces, restoreFaces} = BooleanOperations;
+const {BOOLEAN_UNION} = BooleanOperations;
 
 /**
  * Offset polygon by given value
