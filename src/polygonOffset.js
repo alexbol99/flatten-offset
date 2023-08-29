@@ -3,21 +3,14 @@
  */
 
 "use strict";
-import {Segment, Arc, Polygon, Face} from "@flatten-js/core";
+import {Segment, Arc, Vector, Polygon, Face} from "@flatten-js/core";
 import {CW, CCW, INSIDE, OUTSIDE, ORIENTATION} from "@flatten-js/core";
-import {vector} from "@flatten-js/core";
-// import {unify,subtract} from "@flatten-js/boolean-op";
-// import  {BOOLEAN_UNION} from "@flatten-js/boolean-op";
-//
-// import {addToIntPoints, getSortedArray, splitByIntersections} from "@flatten-js/boolean-op";
-// import {removeNotRelevantChains, removeOldFaces, restoreFaces} from "@flatten-js/boolean-op";
-
+import {SmartIntersections, BooleanOperations} from "@flatten-js/core";
 import {arcSE, arcStartSweep, arcEndSweep} from "./createArcs";
-import Flatten from "@flatten-js/core";
 
-const {unify, subtract, BOOLEAN_UNION} = Flatten.BooleanOperations;
-const {addToIntPoints, getSortedArray, splitByIntersections} = Flatten.BooleanOperations;
-const {removeNotRelevantChains, removeOldFaces, restoreFaces} = Flatten.BooleanOperations;
+const {unify, subtract, BOOLEAN_UNION} = BooleanOperations;
+const {addToIntPoints, getSortedArray, splitByIntersections} = SmartIntersections;
+const {removeNotRelevantChains, removeOldFaces, restoreFaces} = BooleanOperations;
 
 /**
  * Offset polygon by given value
@@ -83,7 +76,6 @@ export function offsetArc(arc, value) {
             arc.counterClockwise === CW ? CCW : CW);
     }
     else {
-        // arc_inner = new Arc(arc.pc, w - arc.r, arc.startAngle, arc.endAngle, arc.counterClockwise);
         arc_inner = new Segment(arc_cap1.end, arc_cap2.start);
     }
 
@@ -170,7 +162,7 @@ export function offsetSegment(seg, value) {
     let w = Math.abs(value);
 
     let polygon = new Polygon();
-    let v_seg = vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
+    let v_seg = new Vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
     let v_seg_unit = v_seg.normalize();
     let v_left = v_seg_unit.rotate90CCW().multiply(w);
     let v_right = v_seg_unit.rotate90CW().multiply(w);

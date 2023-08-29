@@ -1,4 +1,4 @@
-import Flatten, { Arc, vector, Utils, Polygon, CW, CCW, Segment, Face, OUTSIDE, INSIDE, ORIENTATION } from '@flatten-js/core';
+import { vector, Utils, Arc, Polygon, CW, CCW, Segment, Face, OUTSIDE, INSIDE, ORIENTATION, Vector, BooleanOperations, SmartIntersections } from '@flatten-js/core';
 
 function arcSE(center, start, end, counterClockwise) {
     let startAngle = vector(center,start).slope;
@@ -53,9 +53,10 @@ function arcEndSweep(center, end, sweep, counterClockwise) {
  * Created by Alex Bol on 12/02/2018.
  */
 
-const {unify, subtract, BOOLEAN_UNION} = Flatten.BooleanOperations;
-const {addToIntPoints, getSortedArray, splitByIntersections} = Flatten.BooleanOperations;
-const {removeNotRelevantChains, removeOldFaces, restoreFaces} = Flatten.BooleanOperations;
+
+const {unify, subtract, BOOLEAN_UNION} = BooleanOperations;
+const {addToIntPoints, getSortedArray, splitByIntersections} = SmartIntersections;
+const {removeNotRelevantChains, removeOldFaces, restoreFaces} = BooleanOperations;
 
 /**
  * Offset polygon by given value
@@ -120,7 +121,6 @@ function offsetArc(arc, value) {
             arc.counterClockwise === CW ? CCW : CW);
     }
     else {
-        // arc_inner = new Arc(arc.pc, w - arc.r, arc.startAngle, arc.endAngle, arc.counterClockwise);
         arc_inner = new Segment(arc_cap1.end, arc_cap2.start);
     }
 
@@ -207,7 +207,7 @@ function offsetSegment(seg, value) {
     let w = Math.abs(value);
 
     let polygon = new Polygon();
-    let v_seg = vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
+    let v_seg = new Vector(seg.end.x-seg.start.x, seg.end.y-seg.start.y);
     let v_seg_unit = v_seg.normalize();
     let v_left = v_seg_unit.rotate90CCW().multiply(w);
     let v_right = v_seg_unit.rotate90CW().multiply(w);
@@ -220,4 +220,4 @@ function offsetSegment(seg, value) {
     return polygon;
 }
 
-export default offset;
+export { offset as default };

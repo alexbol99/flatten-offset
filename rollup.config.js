@@ -1,5 +1,4 @@
-import resolve from 'rollup-plugin-node-resolve';
-// import { terser } from "rollup-plugin-terser";
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
     input: 'index.js',
@@ -22,12 +21,6 @@ export default {
             globals: {"@flatten-js/core": "Flatten"}
         },
     ],
-    plugins: [
-        resolve({
-            customResolveOptions: {
-                moduleDirectory: 'node_modules'
-            }
-        })
-    ],
+    plugins: [nodeResolve()],
     external: ['@flatten-js/core']
 };
